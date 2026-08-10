@@ -1,0 +1,316 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #ededed;
+    font-family: "Poppins", sans-serif;
+}
+
+.container {
+    width: 350px;
+    min-height: 100vh;
+    margin: auto;
+    background: #fdf3e5;
+}
+
+/* HEADER */
+
+header {
+    height: 90px;
+    padding: 25px;
+    background: #d0c66d;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icons button {
+    border: none;
+    background: transparent;
+
+    color: white;
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+#menuButton {
+    display: flex;
+    align-items: center;
+}
+
+/* CART */
+
+.cart {
+    position: relative;
+    color: white;
+    text-decoration: none;
+}
+
+.cart span {
+    position: absolute;
+
+    top: -8px;
+    right: -10px;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: red;
+    color: white;
+
+    font-size: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    position: fixed;
+
+    top: 0;
+    right: -220px;
+
+    width: 220px;
+    height: 100%;
+
+    background: white;
+
+    transition: 0.3s;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar a {
+    display: block;
+
+    padding: 25px;
+
+    color: black;
+    text-decoration: none;
+}
+
+/* SEARCH */
+
+.search-box {
+    padding: 20px;
+}
+
+.search-box input {
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+    border-radius: 15px;
+}
+
+/* BANNER */
+
+.banner {
+    padding: 0 20px;
+}
+
+.banner img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+/* SECTION */
+
+section {
+    padding: 20px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+/* CATEGORIES */
+
+.categories {
+    display: flex;
+    gap: 15px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-behavior: smooth;
+
+    padding-bottom: 10px;
+}
+
+.categories::-webkit-scrollbar {
+    display: none;
+}
+
+.card {
+    width: 95px;
+    height: 180px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px;
+
+    border-radius: 18px;
+
+    background: white;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card.active {
+    background-color: #ffd957;
+}
+
+.card.active p {
+    font-weight: 600;
+}
+
+.card img {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+}
+
+/* PRODUCTS */
+
+.products {
+    display: flex;
+    gap: 15px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-behavior: smooth;
+
+    padding-bottom: 10px;
+}
+
+.products::-webkit-scrollbar {
+    display: none;
+}
+
+.product-card {
+    width: 95px;
+    height: 180px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px;
+
+    border-radius: 18px;
+
+    background: white;
+}
+
+.product-card img {
+    width: 80px;
+    height: 80px;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: 20%;
+}
+
+.product-card button {
+    width: 80px;
+
+    margin-top: auto;
+    padding: 8px 15px;
+
+    border: none;
+    border-radius: 30px;
+
+    background: #2f8f3b;
+    color: white;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.product-card button:hover {
+    transform: scale(1.1);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* BUTTON */
+
+button {
+    margin-top: 10px;
+
+    padding: 8px 15px;
+
+    border: none;
+    border-radius: 30px;
+
+    color: white;
+    background: #2f8f3b;
+
+    cursor: pointer;
+}
+
+/* CART */
+
+.cart-item {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    margin-bottom: 15px;
+}
+
+.checkout {
+    margin-top: 20px;
+}
+
+.checkout button {
+    width: 100%;
+}

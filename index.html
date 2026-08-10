@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Foodie</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+
+            <div class="logo">
+                Foodie
+            </div>
+
+            <div class="icons">
+
+                <a href="cart.html" class="cart">
+
+                    🛒
+
+                    <span id="cartCount">
+                        0
+                    </span>
+
+                </a>
+
+                <button id="menuButton">
+                    ☰
+                </button>
+
+            </div>
+
+        </header>
+
+        <div class="sidebar" id="sidebar">
+
+            <a href="#">Home</a>
+            <a href="#">Orders</a>
+            <a href="#">Profile</a>
+
+        </div>
+
+        <div class="search-box">
+
+            <input type="text"
+                placeholder="Search the products">
+
+        </div>
+
+        <div class="banner">
+
+            <img src="asset/naspad.jpeg">
+
+        </div>
+
+        <section>
+
+            <h2>Categories</h2>
+
+            <div class="categories">
+
+                <div class="card"  data-filter="all">
+                    <img src="asset/ayamgoreng.png">
+                    <p>All</p>
+                </div>
+
+                <div class="card" data-filter="fry">
+                    <img src="asset/dimsum.png" data-filter="fry">
+                    <p>Fry</p>
+                </div>
+
+                <div class="card" data-filter="steam">
+                    <img src="asset/bakso.png">
+                    <p>Steam</p>
+                </div>
+            
+                  <div class="card" data-filter="Soup">
+                    <img src="asset/bakso.png">
+                    <p>Soup</p>
+                </div>
+            
+                  <div class="card" data-filter="rice">
+                    <img src="asset/bakso.png">
+                    <p>Rice</p>
+                </div>
+            
+                  <div class="card" data-filter="burger">
+                    <img src="asset/bakso.png">
+                    <p>Burger</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section>
+
+            <h2>Most Popular</h2>
+
+            <div class="products">
+
+                <div class="product-card" data-category="burger">
+                    <img src="asset/burger.jpg">
+                    <h4>Burger</h4>
+                    <button class="addBtn">
+                        + Add
+                    </button>
+                </div>
+
+                <div class="product-card" data-category="fry">
+                    <img src="asset/gulai.jpg">
+                    <h4>Gulai</h4>
+                    <button class="addBtn">
+                        + Add
+                    </button>
+                </div>
+
+                <div class="product-card" data-category="rice">
+                    <img src="asset/nasi.jpg">
+                    <h4>Rice Bowl</h4>
+                    <button class="addBtn">
+                        + Add
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
