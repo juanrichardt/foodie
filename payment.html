@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran</title>
+    <link rel="stylesheet" href="payment.css">
+</head>
+
+<body>
+
+    <div class="payment-container">
+
+        <div class="payment-header">
+            <a href="cart.html" class="back-link">←</a>
+            <h2>Pembayaran</h2>
+        </div>
+
+        <!-- ============ TAMPILAN UTAMA: form checkout ============ -->
+        <div class="payment-view show" id="formView">
+
+            <!-- RINCIAN PEMBELIAN -->
+            <section class="payment-section">
+                <h3>Rincian Pembelian</h3>
+                <div id="orderItems"></div>
+                <div class="row">
+                    <span>Subtotal</span>
+                    <span>Rp <span id="subtotalText">0</span></span>
+                </div>
+            </section>
+
+            <!-- ALAMAT PENGIRIMAN (dibaca dari alamat utama di Pengaturan Akun) -->
+            <section class="payment-section">
+                <h3>Alamat Pengiriman</h3>
+                <div id="addressBox"></div>
+            </section>
+
+            <!-- VOUCHER DISKON -->
+            <section class="payment-section">
+                <h3>Voucher Diskon</h3>
+                <div id="voucherOptions"></div>
+            </section>
+
+            <!-- PILIHAN PENGIRIMAN -->
+            <section class="payment-section">
+                <h3>Pilihan Pengiriman</h3>
+                <div id="shippingOptions"></div>
+            </section>
+
+            <!-- METODE PEMBAYARAN -->
+            <section class="payment-section">
+                <h3>Metode Pembayaran</h3>
+                <div id="paymentMethods"></div>
+            </section>
+
+            <!-- RINGKASAN TOTAL -->
+            <section class="payment-section summary-box">
+                <div class="row">
+                    <span>Subtotal</span>
+                    <span>Rp <span id="sumSubtotal">0</span></span>
+                </div>
+                <div class="row">
+                    <span>Diskon Voucher</span>
+                    <span>- Rp <span id="sumDiscount">0</span></span>
+                </div>
+                <div class="row">
+                    <span>Ongkos Kirim</span>
+                    <span>Rp <span id="sumShipping">0</span></span>
+                </div>
+                <div class="row total-row">
+                    <span>Total Bayar</span>
+                    <span>Rp <span id="sumTotal">0</span></span>
+                </div>
+            </section>
+
+            <!-- VERIFIKASI & TOMBOL BAYAR
+                 kalau akun belum punya no HP, kotak verifikasi/tombol bayar
+                 diganti sama peringatan buat lengkapin dulu -->
+            <section class="payment-section">
+                <h3>Verifikasi Pembayaran</h3>
+
+                <div class="warning-box" id="notRegisteredBox">
+                    <p>
+                        Kamu belum terdaftar. Lengkapi <strong>Nomor Telepon</strong>
+                        di Pengaturan Akun dulu sebelum bisa bayar.
+                    </p>
+                    <a href="account.html" class="save-btn link-btn">Ke Pengaturan Akun</a>
+                </div>
+
+                <div id="verifyBox">
+                    <p class="hint">
+                        Masukkan kode verifikasi yang dikirim ke nomor HP terdaftar kamu.
+                    </p>
+                    <p class="hint demo-hint" id="demoHint"></p>
+                    <input type="text" id="verifyCodeInput" placeholder="Masukkan kode verifikasi">
+                    <p class="error-text" id="verifyError"></p>
+                </div>
+            </section>
+
+            <button class="pay-btn" id="payNowBtn">Bayar Sekarang</button>
+
+        </div>
+
+        <!-- ============ TAMPILAN: sedang diproses ============ -->
+        <div class="payment-view" id="processingView">
+            <div class="spinner"></div>
+            <p>Memproses pembayaran...</p>
+        </div>
+
+        <!-- ============ TAMPILAN: berhasil ============ -->
+        <div class="payment-view" id="successView">
+            <div class="success-icon">✔</div>
+            <h3>Pembayaran Berhasil!</h3>
+            <p>Total dibayar: Rp <span id="successTotal">0</span></p>
+            <a href="index.html" class="pay-btn link-btn">Kembali ke Beranda</a>
+        </div>
+
+    </div>
+
+    <nav class="bottom-nav">
+
+        <a href="index.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Beranda</span>
+        </a>
+
+        <a href="notifications.html" class="nav-item">
+            <span class="nav-icon">🔔</span>
+            <span class="nav-label">Notifikasi</span>
+        </a>
+
+        <a href="account.html" class="nav-item">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Akun</span>
+        </a>
+
+    </nav>
+
+    <script src="payment.js"></script>
+
+</body>
+</html>

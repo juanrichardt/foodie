@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan Akun</title>
+    <link rel="stylesheet" href="account.css">
+</head>
+
+<body>
+
+    <div class="account-container">
+
+        <div class="account-header">
+            <h2>Pengaturan Akun</h2>
+        </div>
+
+        <div class="account-content">
+
+            <!-- EDIT PROFIL: nama & no HP. No HP ini yang dipakai
+                 sebagai syarat "terdaftar" biar bisa checkout -->
+            <section class="account-section">
+
+                <h3>Edit Profil</h3>
+
+                <label>Nama</label>
+                <input type="text" id="nameInput" placeholder="Nama kamu">
+
+                <label>Nomor Telepon</label>
+                <input type="tel" id="phoneInput" placeholder="Contoh: 081234567890">
+
+                <p class="hint">
+                    Nomor telepon dipakai buat verifikasi saat bayar.
+                    Kalau belum diisi, kamu belum bisa checkout.
+                </p>
+
+                <button class="save-btn" id="saveProfileBtn">Simpan Profil</button>
+                <p class="save-msg" id="profileSavedMsg">Profil tersimpan ✔</p>
+
+            </section>
+
+            <!-- KELOLA ALAMAT: bisa nambah, hapus, & pilih alamat utama
+                 (alamat utama inilah yang dipakai sebagai alamat pengiriman) -->
+            <section class="account-section">
+
+                <h3>Alamat Pengiriman</h3>
+
+                <div id="addressList"></div>
+
+                <div class="address-form">
+
+                    <label>Label Alamat</label>
+                    <input type="text" id="addrLabel" placeholder="Rumah / Kantor / dll">
+
+                    <label>Nama Penerima</label>
+                    <input type="text" id="addrRecipient" placeholder="Nama penerima">
+
+                    <label>No. Telepon Penerima</label>
+                    <input type="tel" id="addrPhone" placeholder="No. telepon penerima">
+
+                    <label>Alamat Lengkap</label>
+                    <textarea id="addrFull" rows="3" placeholder="Jalan, no rumah, kecamatan, kota, kode pos"></textarea>
+
+                    <button class="save-btn" id="addAddressBtn">+ Tambah Alamat</button>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+    <nav class="bottom-nav">
+
+        <a href="index.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Beranda</span>
+        </a>
+
+        <a href="notifications.html" class="nav-item">
+            <span class="nav-icon">🔔</span>
+            <span class="nav-label">Notifikasi</span>
+        </a>
+
+        <a href="account.html" class="nav-item active">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Akun</span>
+        </a>
+
+    </nav>
+
+    <script src="account.js"></script>
+
+</body>
+</html>

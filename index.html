@@ -69,9 +69,15 @@
 
         </div>
 
+        <!-- BANNER SLIDESHOW: semua gambar ditumpuk, yang class-nya "active"
+             yang keliatan. script.js yang gantian nambah/hapus "active"
+             tiap beberapa detik. Tinggal tambah <img> lagi kalau mau nambah slide,
+             ganti path src sesuai gambar banner kamu di folder asset/ -->
         <div class="banner">
 
-            <img src="asset/naspad.jpeg">
+            <img src="asset/naspad.jpeg" class="banner-img active">
+            <img src="asset/burger.jpg" class="banner-img">
+            <img src="asset/nasi.jpg" class="banner-img">
 
         </div>
 
@@ -151,6 +157,27 @@
         </section>
 
     </div>
+
+    <!-- BOTTOM NAVBAR: dipasang sama di semua halaman, class "active"
+         beda-beda tergantung lagi di halaman mana -->
+    <nav class="bottom-nav">
+
+        <a href="index.html" class="nav-item active">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Beranda</span>
+        </a>
+
+        <a href="notifications.html" class="nav-item">
+            <span class="nav-icon">🔔</span>
+            <span class="nav-label">Notifikasi</span>
+        </a>
+
+        <a href="account.html" class="nav-item">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Akun</span>
+        </a>
+
+    </nav>
 
     <script src="script.js"></script>
 

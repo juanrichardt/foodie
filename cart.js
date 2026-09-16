@@ -89,3 +89,22 @@ function toggleCheck(index) {
 }
 
 renderCart();
+
+/* ================================================================
+   CHECKOUT -> pindah ke halaman payment.html (bukan popup lagi)
+   Item yang dicentang (selected) di cart ini yang nanti dibaca
+   ulang oleh payment.js dari localStorage "cart".
+   ================================================================ */
+const checkoutBtn = document.getElementById("checkoutBtn");
+
+checkoutBtn.addEventListener("click", function () {
+
+    const hasSelected = cart.some(item => item.selected !== false);
+
+    if (!hasSelected) {
+        alert("Pilih minimal 1 barang dulu sebelum checkout ya.");
+        return;
+    }
+
+    window.location.href = "payment.html";
+});

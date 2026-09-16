@@ -101,3 +101,23 @@ const productCards = document.querySelectorAll(".product-card");
     });
 
 });
+/* ================================================================
+   BANNER SLIDESHOW — auto ganti gambar tiap beberapa detik
+   Cara kerja: ambil semua .banner-img, tiap X detik pindahin
+   class "active" ke gambar berikutnya (looping balik ke awal lagi).
+   ================================================================ */
+const bannerImages = document.querySelectorAll(".banner-img");
+let currentBanner = 0;
+
+if (bannerImages.length > 1) {
+
+    setInterval(function () {
+
+        bannerImages[currentBanner].classList.remove("active");
+
+        currentBanner = (currentBanner + 1) % bannerImages.length;
+
+        bannerImages[currentBanner].classList.add("active");
+
+    }, 3000); // <-- ganti angka ini (dalam milidetik) buat atur kecepatan. 3000 = 3 detik
+}
