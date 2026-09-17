@@ -1,9 +1,59 @@
+/* ================================================================
+   SIDEBAR (menu hamburger ☰ di kanan atas)
+   FUNGSI YANG DIBENERIN:
+   - sekarang ada overlay gelap di belakang sidebar
+   - klik overlay ATAU tombol X di dalam sidebar -> ikut nutup
+   - ikon hamburger otomatis berubah jadi ikon X pas sidebar kebuka
+   - link di dalam sidebar sekarang beneran ngarah ke halaman
+     (sebelumnya cuma href="#" doang, nggak ngapa-ngapain)
+   ================================================================ */
+
 const menuButton = document.getElementById("menuButton");
 const sidebar = document.getElementById("sidebar");
+const sidebarOverlay = document.getElementById("sidebarOverlay");
+const sidebarClose = document.getElementById("sidebarClose");
+
+const hamburgerIcon = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="4" y1="6" x2="20" y2="6"/>
+        <line x1="4" y1="12" x2="20" y2="12"/>
+        <line x1="4" y1="18" x2="20" y2="18"/>
+    </svg>
+`;
+
+const closeIcon = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+`;
+
+function openSidebar() {
+    sidebar.classList.add("active");
+    sidebarOverlay.classList.add("active");
+    menuButton.innerHTML = closeIcon;
+}
+
+function closeSidebar() {
+    sidebar.classList.remove("active");
+    sidebarOverlay.classList.remove("active");
+    menuButton.innerHTML = hamburgerIcon;
+}
 
 menuButton.addEventListener("click", function () {
-    sidebar.classList.toggle("active");
+    if (sidebar.classList.contains("active")) {
+        closeSidebar();
+    } else {
+        openSidebar();
+    }
 });
+
+sidebarOverlay.addEventListener("click", closeSidebar);
+sidebarClose.addEventListener("click", closeSidebar);
+
+/* ================================================================
+   CART COUNT & ADD TO CART
+   ================================================================ */
 
 const addButton = document.querySelectorAll(".addBtn");
 const cartCount = document.getElementById("cartCount");
@@ -27,26 +77,21 @@ addButton.forEach(function (button) {
             "Rice Bowl": 74000
         };
 
-        const existingItem = cart.find(
-            item => item.name === productName
-        );
+        const existingItem = cart.find(item => item.name === productName);
 
         if (existingItem) {
             existingItem.quantity++;
         } else {
-           cart.push({
-        name: productName,
-        image: productImage,
-        price: prices[productName],
-        quantity: 1,
-        selected: true
-    });
+            cart.push({
+                name: productName,
+                image: productImage,
+                price: prices[productName],
+                quantity: 1,
+                selected: true
+            });
         }
 
-        localStorage.setItem(
-            "cart",
-            JSON.stringify(cart)
-        );
+        localStorage.setItem("cart", JSON.stringify(cart));
 
         cartCount.innerHTML = cart.length;
 
@@ -57,6 +102,10 @@ addButton.forEach(function (button) {
         }, 1000);
     });
 });
+
+/* ================================================================
+   SCROLL KATEGORI & PRODUK PAKAI MOUSE WHEEL
+   ================================================================ */
 
 const categories = document.querySelector(".categories");
 const products = document.querySelector(".products");
@@ -70,10 +119,15 @@ products.addEventListener("wheel", function (event) {
     event.preventDefault();
     products.scrollLeft += event.deltaY;
 });
+
+/* ================================================================
+   FILTER KATEGORI
+   ================================================================ */
+
 const categoryButtons = document.querySelectorAll(".card");
 const productCards = document.querySelectorAll(".product-card");
 
- categoryButtons.forEach((category) => {
+categoryButtons.forEach((category) => {
 
     category.addEventListener("click", function () {
 
@@ -87,10 +141,7 @@ const productCards = document.querySelectorAll(".product-card");
 
         productCards.forEach((product) => {
 
-            if (
-                filter === "all" ||
-                product.dataset.category === filter
-            ) {
+            if (filter === "all" || product.dataset.category === filter) {
                 product.style.display = "flex";
             } else {
                 product.style.display = "none";
@@ -101,11 +152,11 @@ const productCards = document.querySelectorAll(".product-card");
     });
 
 });
+
 /* ================================================================
    BANNER SLIDESHOW — auto ganti gambar tiap beberapa detik
-   Cara kerja: ambil semua .banner-img, tiap X detik pindahin
-   class "active" ke gambar berikutnya (looping balik ke awal lagi).
    ================================================================ */
+
 const bannerImages = document.querySelectorAll(".banner-img");
 let currentBanner = 0;
 
@@ -119,5 +170,5 @@ if (bannerImages.length > 1) {
 
         bannerImages[currentBanner].classList.add("active");
 
-    }, 3000); // <-- ganti angka ini (dalam milidetik) buat atur kecepatan. 3000 = 3 detik
+    }, 3000); // <-- ganti angka ini (milidetik) buat atur kecepatan
 }

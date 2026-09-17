@@ -1,26 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
 
     <meta charset="UTF-8">
 
+    <!-- RESPONSIVE FIX: maximum-scale=1 & user-scalable=no ngunci
+         zoom, jadi orang nggak bisa pinch-zoom-out sampai keliatan
+         area abu di belakang container -->
     <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>Foodie</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="navbar.css">
 
-    <link rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 </head>
 
@@ -37,48 +35,64 @@
             <div class="icons">
 
                 <a href="cart.html" class="cart">
-
-                    🛒
-
-                    <span id="cartCount">
-                        0
-                    </span>
-
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="20" r="1"/>
+                        <circle cx="19" cy="20" r="1"/>
+                        <path d="M3 4h2l2.5 11h11L21 7H6"/>
+                    </svg>
+                    <span id="cartCount">0</span>
                 </a>
 
+                <!-- HAMBURGER: fungsinya dibenerin di script.js
+                     (toggle sidebar + overlay + jadi ikon X pas kebuka) -->
                 <button id="menuButton">
-                    ☰
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <line x1="4" y1="6" x2="20" y2="6"/>
+                        <line x1="4" y1="12" x2="20" y2="12"/>
+                        <line x1="4" y1="18" x2="20" y2="18"/>
+                    </svg>
                 </button>
 
             </div>
 
         </header>
 
+        <!-- OVERLAY gelap di belakang sidebar, klik di sini buat nutup -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
         <div class="sidebar" id="sidebar">
 
-            <a href="#">Home</a>
-            <a href="#">Orders</a>
-            <a href="#">Profile</a>
+            <button class="sidebar-close" id="sidebarClose">✕</button>
+
+            <a href="index.html">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Beranda
+            </a>
+
+            <a href="account.html#statusPesanan">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3H8a2 2 0 0 0-2 2v16l6-3 6 3V5a2 2 0 0 0-2-2z"/></svg>
+                Pesanan Saya
+            </a>
+
+            <a href="account.html">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Profil
+            </a>
 
         </div>
 
         <div class="search-box">
-
-            <input type="text"
-                placeholder="Search the products">
-
+            <input type="text" placeholder="Search the products">
         </div>
 
         <!-- BANNER SLIDESHOW: semua gambar ditumpuk, yang class-nya "active"
              yang keliatan. script.js yang gantian nambah/hapus "active"
-             tiap beberapa detik. Tinggal tambah <img> lagi kalau mau nambah slide,
-             ganti path src sesuai gambar banner kamu di folder asset/ -->
+             tiap beberapa detik. -->
         <div class="banner">
-
-            <img src="asset/naspad.jpeg" class="banner-img active">
-            <img src="asset/burger.jpg" class="banner-img">
-            <img src="asset/nasi.jpg" class="banner-img">
-
+            <img src="asset/banner (2).jpg" class="banner-img active">
+            <img src="asset/banner.jpeg" class="banner-img">
+            <img src="asset/banner.jpg" class="banner-img">
+            <img src="asset/banner.avif" class="banner-img">
         </div>
 
         <section>
@@ -87,7 +101,7 @@
 
             <div class="categories">
 
-                <div class="card"  data-filter="all">
+                <div class="card" data-filter="all">
                     <img src="asset/ayamgoreng.png">
                     <p>All</p>
                 </div>
@@ -101,18 +115,18 @@
                     <img src="asset/bakso.png">
                     <p>Steam</p>
                 </div>
-            
-                  <div class="card" data-filter="Soup">
+
+                <div class="card" data-filter="Soup">
                     <img src="asset/bakso.png">
                     <p>Soup</p>
                 </div>
-            
-                  <div class="card" data-filter="rice">
+
+                <div class="card" data-filter="rice">
                     <img src="asset/bakso.png">
                     <p>Rice</p>
                 </div>
-            
-                  <div class="card" data-filter="burger">
+
+                <div class="card" data-filter="burger">
                     <img src="asset/bakso.png">
                     <p>Burger</p>
                 </div>
@@ -130,26 +144,19 @@
                 <div class="product-card" data-category="burger">
                     <img src="asset/burger.jpg">
                     <h4>Burger</h4>
-                    <button class="addBtn">
-                        + Add
-                    </button>
+                    <button class="addBtn">+ Add</button>
                 </div>
 
                 <div class="product-card" data-category="fry">
                     <img src="asset/gulai.jpg">
                     <h4>Gulai</h4>
-                    <button class="addBtn">
-                        + Add
-                    </button>
+                    <button class="addBtn">+ Add</button>
                 </div>
 
                 <div class="product-card" data-category="rice">
                     <img src="asset/nasi.jpg">
                     <h4>Rice Bowl</h4>
-                    <button class="addBtn">
-                        + Add
-                    </button>
-
+                    <button class="addBtn">+ Add</button>
                 </div>
 
             </div>
@@ -158,28 +165,11 @@
 
     </div>
 
-    <!-- BOTTOM NAVBAR: dipasang sama di semua halaman, class "active"
-         beda-beda tergantung lagi di halaman mana -->
-    <nav class="bottom-nav">
-
-        <a href="index.html" class="nav-item active">
-            <span class="nav-icon">🏠</span>
-            <span class="nav-label">Beranda</span>
-        </a>
-
-        <a href="notifications.html" class="nav-item">
-            <span class="nav-icon">🔔</span>
-            <span class="nav-label">Notifikasi</span>
-        </a>
-
-        <a href="account.html" class="nav-item">
-            <span class="nav-icon">⚙️</span>
-            <span class="nav-label">Akun</span>
-        </a>
-
-    </nav>
+    <!-- NAVBAR BAWAH: kontennya di-generate otomatis oleh navbar.js -->
+    <div id="bottomNav"></div>
 
     <script src="script.js"></script>
+    <script src="navbar.js"></script>
 
 </body>
 

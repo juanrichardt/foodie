@@ -1,7 +1,7 @@
 /* ================================================================
-   DATA AKUN disimpan di localStorage dengan key "account":
-   { name, phone, addresses: [{ label, recipient, phone, fullAddress, isDefault }] }
-   Nomor telepon di sini yang dipakai payment.js buat verifikasi bayar.
+   DATA AKUN: { name, phone, addresses: [...] } di localStorage "account"
+   (form edit-nya sekarang ada di edit-profile.html & address.html,
+   di sini cuma nampilin ringkasannya doang)
    ================================================================ */
 
 function getAccount() {
@@ -12,126 +12,178 @@ function getAccount() {
     };
 }
 
-function saveAccount(account) {
-    localStorage.setItem("account", JSON.stringify(account));
+const account = getAccount();
+
+const avatarInitial = document.getElementById("avatarInitial");
+const profileNameText = document.getElementById("profileNameText");
+const profilePhoneText = document.getElementById("profilePhoneText");
+
+if (account.name) {
+    profileNameText.innerText = account.name;
+    avatarInitial.innerText = account.name.trim().charAt(0).toUpperCase();
+} else {
+    profileNameText.innerText = "Belum ada nama";
+    avatarInitial.innerText = "?";
 }
 
-let account = getAccount();
+profilePhoneText.innerText = account.phone
+    ? account.phone
+    : "Nomor HP belum diisi — lengkapi biar bisa checkout";
 
-/* ---------- EDIT PROFIL ---------- */
+/* ================================================================
+   UBAH KATA SANDI (DECOY) — cuma simulasi tampilan, password-nya
+   nggak dipakai buat autentikasi beneran di app ini
+   ================================================================ */
 
-const nameInput = document.getElementById("nameInput");
-const phoneInput = document.getElementById("phoneInput");
-const saveProfileBtn = document.getElementById("saveProfileBtn");
-const profileSavedMsg = document.getElementById("profileSavedMsg");
+const changePasswordBtn = document.getElementById("changePasswordBtn");
+const changePasswordSection = document.getElementById("changePasswordSection");
+const savePasswordBtn = document.getElementById("savePasswordBtn");
+const passwordSavedMsg = document.getElementById("passwordSavedMsg");
+const helpBtn = document.getElementById("helpBtn");
+const helpSection = document.getElementById("helpSection");
 
-nameInput.value = account.name || "";
-phoneInput.value = account.phone || "";
-
-saveProfileBtn.addEventListener("click", function () {
-
-    account.name = nameInput.value.trim();
-    account.phone = phoneInput.value.trim();
-
-    saveAccount(account);
-
-    profileSavedMsg.classList.add("show");
-
-    setTimeout(function () {
-        profileSavedMsg.classList.remove("show");
-    }, 2000);
+changePasswordBtn.addEventListener("click", function () {
+    helpSection.style.display = "none";
+    changePasswordSection.style.display =
+        changePasswordSection.style.display === "none" ? "block" : "none";
 });
 
-/* ---------- KELOLA ALAMAT ---------- */
+helpBtn.addEventListener("click", function () {
+    changePasswordSection.style.display = "none";
+    helpSection.style.display =
+        helpSection.style.display === "none" ? "block" : "none";
+});
 
-const addressList = document.getElementById("addressList");
-const addrLabel = document.getElementById("addrLabel");
-const addrRecipient = document.getElementById("addrRecipient");
-const addrPhone = document.getElementById("addrPhone");
-const addrFull = document.getElementById("addrFull");
-const addAddressBtn = document.getElementById("addAddressBtn");
+savePasswordBtn.addEventListener("click", function () {
 
-function renderAddresses() {
+    const oldPass = document.getElementById("oldPasswordInput").value;
+    const newPass = document.getElementById("newPasswordInput").value;
 
-    addressList.innerHTML = "";
-
-    if (!account.addresses || account.addresses.length === 0) {
-        addressList.innerHTML = `<p class="empty-text">Belum ada alamat tersimpan.</p>`;
+    if (!oldPass || !newPass) {
+        alert("Isi kata sandi lama & baru dulu ya.");
         return;
     }
 
-    account.addresses.forEach(function (addr, index) {
+    // catatan: DECOY, nggak beneran ngubah autentikasi apapun
+    document.getElementById("oldPasswordInput").value = "";
+    document.getElementById("newPasswordInput").value = "";
 
-        addressList.innerHTML += `
-            <div class="address-card">
+    passwordSavedMsg.classList.add("show");
+    setTimeout(() => passwordSavedMsg.classList.remove("show"), 2500);
+});
 
-                <div class="address-top">
-                    <strong>${addr.label}</strong>
-                    ${addr.isDefault ? '<span class="badge">Utama</span>' : ''}
+/* ================================================================
+   LOGOUT — bersihin data akun (nama, HP, alamat) dari perangkat ini
+   ================================================================ */
+
+document.getElementById("logoutBtn").addEventListener("click", function () {
+
+    const confirmLogout = confirm("Yakin mau keluar? Data profil & alamat di perangkat ini akan dihapus.");
+
+    if (confirmLogout) {
+        localStorage.removeItem("account");
+        window.location.href = "index.html";
+    }
+});
+
+/* ================================================================
+   STATUS PESANAN
+   PENTING: ini SIMULASI. Nggak ada driver/GPS asli — status
+   "berjalan" cuma dihitung dari selisih waktu sejak pesanan dibuat
+   (createdAt), biar ada progres yang keliatan buat demo:
+   0–20 detik        -> Pesanan sedang dibuat
+   20–40 detik       -> Pesanan sudah diambil driver
+   40 detik ke atas  -> Pesanan sudah diantar
+   ================================================================ */
+
+const STAGE_1_SECONDS = 20;
+const STAGE_2_SECONDS = 40;
+
+function getOrderStatus(order) {
+
+    const elapsedSeconds = (Date.now() - order.createdAt) / 1000;
+
+    if (elapsedSeconds < STAGE_1_SECONDS) {
+        return { key: "dibuat", label: "Pesanan sedang dibuat" };
+    }
+
+    if (elapsedSeconds < STAGE_2_SECONDS) {
+        return { key: "diambil", label: "Pesanan sudah diambil driver" };
+    }
+
+    return { key: "diantar", label: "Pesanan sudah diantar" };
+}
+
+let expandedOrderId = null;
+
+const orderList = document.getElementById("orderList");
+
+function renderOrders() {
+
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    if (orders.length === 0) {
+        orderList.innerHTML = `<p class="empty-text">Belum ada pesanan. Yuk mulai belanja dulu!</p>`;
+        return;
+    }
+
+    orderList.innerHTML = "";
+
+    orders.forEach(function (order) {
+
+        const status = getOrderStatus(order);
+        const isExpanded = order.id === expandedOrderId;
+
+        const itemsList = order.items
+            .map(item => `<li>${item.name} x${item.quantity}</li>`)
+            .join("");
+
+        const addressText = order.address
+            ? `${order.address.recipient} — ${order.address.phone}<br>${order.address.fullAddress}`
+            : "Alamat tidak tersedia";
+
+        orderList.innerHTML += `
+            <div class="order-item ${isExpanded ? "expanded" : ""}"
+                 onclick="toggleOrder('${order.id}')">
+
+                <div class="order-top">
+                    <span class="order-id">${order.id}</span>
+                    <span class="status-badge ${status.key}">${status.label}</span>
                 </div>
 
-                <p>${addr.recipient} — ${addr.phone}</p>
-                <p>${addr.fullAddress}</p>
+                <p class="order-summary-text">
+                    ${order.items.length} item — Rp ${order.total.toLocaleString("id-ID")}
+                </p>
 
-                <div class="address-actions">
-                    ${!addr.isDefault ? `<button onclick="setDefaultAddress(${index})">Jadikan Utama</button>` : ''}
-                    <button class="delete-btn" onclick="deleteAddress(${index})">Hapus</button>
-                </div>
+                ${isExpanded ? `
+                    <div class="order-detail">
+                        <div><strong>Total Harga:</strong> Rp ${order.total.toLocaleString("id-ID")}</div>
+                        <div><strong>Metode Bayar:</strong> ${order.paymentMethod}</div>
+                        <div><strong>Alamat Pengiriman:</strong><br>${addressText}</div>
+                        <div><strong>Nama Pengemudi:</strong> ${order.driver}</div>
+                        <div><strong>Barang:</strong></div>
+                        <ul class="detail-items">${itemsList}</ul>
+                    </div>
+                ` : ""}
 
             </div>
         `;
     });
 }
 
-function setDefaultAddress(index) {
-
-    account.addresses.forEach(function (addr, i) {
-        addr.isDefault = (i === index);
-    });
-
-    saveAccount(account);
-    renderAddresses();
+function toggleOrder(id) {
+    expandedOrderId = (expandedOrderId === id) ? null : id;
+    renderOrders();
 }
 
-function deleteAddress(index) {
+renderOrders();
 
-    account.addresses.splice(index, 1);
+// refresh tiap 5 detik biar status "dibuat -> diambil -> diantar"
+// keliatan jalan sendiri tanpa perlu reload halaman
+setInterval(renderOrders, 5000);
 
-    // kalau yang dihapus itu default, jadiin alamat pertama sisanya default
-    if (account.addresses.length > 0 && !account.addresses.some(a => a.isDefault)) {
-        account.addresses[0].isDefault = true;
-    }
-
-    saveAccount(account);
-    renderAddresses();
+// kalau dibuka lewat link "Pesanan Saya" (ada #statusPesanan di URL),
+// otomatis scroll ke bagian status pesanan
+if (window.location.hash === "#statusPesanan") {
+    document.getElementById("statusPesanan").scrollIntoView({ behavior: "smooth" });
 }
-
-addAddressBtn.addEventListener("click", function () {
-
-    if (!addrLabel.value || !addrRecipient.value || !addrPhone.value || !addrFull.value) {
-        alert("Lengkapi semua field alamat dulu ya.");
-        return;
-    }
-
-    if (!account.addresses) {
-        account.addresses = [];
-    }
-
-    account.addresses.push({
-        label: addrLabel.value.trim(),
-        recipient: addrRecipient.value.trim(),
-        phone: addrPhone.value.trim(),
-        fullAddress: addrFull.value.trim(),
-        isDefault: account.addresses.length === 0 // alamat pertama otomatis jadi utama
-    });
-
-    saveAccount(account);
-    renderAddresses();
-
-    addrLabel.value = "";
-    addrRecipient.value = "";
-    addrPhone.value = "";
-    addrFull.value = "";
-});
-
-renderAddresses();

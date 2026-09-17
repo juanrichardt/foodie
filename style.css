@@ -4,9 +4,19 @@
     box-sizing: border-box;
 }
 
+/* RESPONSIVE FIX: html-nya dikasih background yang sama kayak body,
+   biar pas ada efek overscroll/bounce (misal di iPhone Safari),
+   yang keliatan di belakang bukan putih polos, tapi warna yang senada.
+   overflow-x hidden juga jaga-jaga biar nggak ada scroll ke samping. */
+html {
+    background: #ededed;
+    overflow-x: hidden;
+}
+
 body {
     background: #ededed;
     font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
 }
 
 /* RESPONSIVE: width diubah dari fixed 350px jadi fluid.
@@ -90,33 +100,86 @@ header {
     align-items: center;
 }
 
-/* SIDEBAR */
+/* SIDEBAR (fungsi yang dibenerin: sekarang ada overlay gelap di
+   belakangnya buat nutup sidebar kalau diklik, dan tombol close (X)
+   di dalam sidebar-nya sendiri) */
+
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: 0.3s;
+
+    z-index: 800;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
 
 .sidebar {
     position: fixed;
 
     top: 0;
-    right: -220px;
+    right: -240px;
 
-    width: 220px;
+    width: 240px;
     height: 100%;
 
     background: white;
 
     transition: 0.3s;
+
+    z-index: 900;
 }
 
 .sidebar.active {
     right: 0;
 }
 
-.sidebar a {
+.sidebar-close {
     display: block;
 
-    padding: 25px;
+    margin: 15px 20px 0 auto;
+
+    border: none;
+    background: transparent;
+
+    font-size: 22px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 18px 25px;
 
     color: black;
     text-decoration: none;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+.sidebar a:hover {
+    background: #fdf3e5;
+}
+
+.sidebar a svg {
+    width: 20px;
+    height: 20px;
+    stroke: #d0c66d;
 }
 
 /* SEARCH */
@@ -429,61 +492,5 @@ button {
     }
 }
 
-/* ================================================================
-   BOTTOM NAVBAR (komponen sama persis ada di setiap file css:
-   style.css, cart.css, payment.css, account.css, notifications.css)
-   ================================================================ */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    width: 100%;
-    max-width: 350px;
-    margin: 0 auto;
-
-    background: white;
-
-    display: flex;
-    justify-content: space-around;
-
-    padding: 10px 0;
-
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
-
-    z-index: 500;
-}
-
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-
-    text-decoration: none;
-    color: #999;
-
-    font-size: 11px;
-}
-
-.nav-item.active {
-    color: #b8ab3f;
-    font-weight: 600;
-}
-
-.nav-icon {
-    font-size: 20px;
-}
-
-@media (min-width: 768px) {
-    .bottom-nav {
-        max-width: 600px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .bottom-nav {
-        max-width: 700px;
-    }
-}
+/* Navbar bawah dipindah semua ke navbar.css (satu file, dipakai
+   semua halaman) biar nggak dobel-dobel CSS-nya di sini. */

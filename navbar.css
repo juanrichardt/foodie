@@ -1,0 +1,92 @@
+/* ================================================================
+   NAVBAR.CSS
+   Satu-satunya file CSS buat navbar bawah, dipakai di SEMUA halaman
+   (index, cart, payment, account, notifications) lewat:
+   <link rel="stylesheet" href="navbar.css">
+   Markup-nya sendiri di-generate otomatis oleh navbar.js, jadi
+   nggak perlu nulis ulang HTML navbar di tiap file.
+   ================================================================ */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+
+    background: white;
+
+    display: flex;
+    justify-content: space-around;
+
+    padding: 10px 0;
+
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+
+    z-index: 500;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+
+    padding: 6px 16px;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+    color: #999;
+
+    font-size: 11px;
+
+    /* biar transisi warna & background pas hover/active-nya halus */
+    transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+/* EFEK HOVER: warna icon+teks berubah + background lembut muncul */
+.nav-item:hover {
+    color: #c9ab3f;
+    background: #fdf3e5;
+    transform: translateY(-2px);
+}
+
+/* MENU YANG LAGI DIPILIH: warna beda + background kuning muda */
+.nav-item.active {
+    color: #a3860f;
+    font-weight: 600;
+    background: #ffe8a3;
+}
+
+.nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* svg icon-nya ikut warna teks (currentColor), jadi otomatis
+   berubah warna pas hover / active tanpa perlu CSS tambahan */
+.nav-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+}
+
+/* ================================================================
+   RESPONSIVE — navbar ikut melebar sama kayak container halaman
+   ================================================================ */
+@media (min-width: 768px) {
+    .bottom-nav {
+        max-width: 600px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .bottom-nav {
+        max-width: 700px;
+    }
+}

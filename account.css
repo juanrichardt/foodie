@@ -4,9 +4,15 @@
     box-sizing: border-box;
 }
 
+html {
+    background: #e8e8e8;
+    overflow-x: hidden;
+}
+
 body {
     background: #e8e8e8;
     font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
 }
 
 .account-container {
@@ -21,16 +27,179 @@ body {
 .account-header {
     background: #d0c66d;
     padding: 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .account-header h2 {
     color: white;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 600;
+}
+
+.back-link {
+    color: white;
+    font-size: 22px;
+    text-decoration: none;
 }
 
 .account-content {
     padding: 20px;
+}
+
+/* ============================================================
+   PROFILE SUMMARY CARD (di halaman Akun / hub) — read-only,
+   ada tombol pensil buat pindah ke halaman Edit Profil sendiri
+   ============================================================ */
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    background: #fff6e8;
+
+    padding: 18px;
+    margin-bottom: 20px;
+
+    border-radius: 20px;
+}
+
+.avatar-circle {
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #ffd957;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #7a6a1f;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-info h3 {
+    font-size: 16px;
+}
+
+.profile-info p {
+    font-size: 12px;
+    color: #777;
+
+    margin-top: 3px;
+}
+
+.edit-icon-btn {
+    border: none;
+    background: white;
+
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.edit-icon-btn:hover {
+    background: #ffe8a3;
+}
+
+.edit-icon-btn svg {
+    width: 17px;
+    height: 17px;
+    stroke: #a3860f;
+}
+
+/* ============================================================
+   MENU LIST (Alamat Saya, Ubah Kata Sandi, Bantuan, Keluar, dll)
+   ============================================================ */
+.menu-list {
+    background: #fff6e8;
+
+    border-radius: 20px;
+
+    margin-bottom: 20px;
+
+    overflow: hidden;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 16px 18px;
+
+    text-decoration: none;
+    color: #333;
+
+    border: none;
+    background: none;
+    width: 100%;
+
+    text-align: left;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.menu-item + .menu-item {
+    border-top: 1px solid #f1e2bd;
+}
+
+.menu-item:hover {
+    background: #ffe8a3;
+}
+
+.menu-item .menu-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+
+    stroke: #d0c66d;
+}
+
+.menu-item span.menu-label {
+    flex: 1;
+}
+
+.menu-item .chevron {
+    width: 16px;
+    height: 16px;
+    stroke: #bbb;
+}
+
+.menu-item.danger {
+    color: #c0392b;
+}
+
+.menu-item.danger .menu-icon {
+    stroke: #c0392b;
 }
 
 .account-section {
@@ -201,76 +370,125 @@ body {
     border-top: 1px dashed #d9c99a;
 }
 
-/* ================================================================
-   BOTTOM NAVBAR (komponen sama persis ada di setiap file css)
-   ================================================================ */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+/* ============================================================
+   STATUS PESANAN (di halaman Akun) — 3 tahap: dibuat / diambil
+   driver / diantar, tiap pesanan bisa diklik buat lihat detail
+   ============================================================ */
+.order-item {
+    background: #ffe8a3;
 
-    width: 100%;
-    max-width: 350px;
-    margin: 0 auto;
+    padding: 15px;
+    margin-bottom: 12px;
 
-    background: white;
+    border-radius: 15px;
 
-    display: flex;
-    justify-content: space-around;
+    cursor: pointer;
 
-    padding: 10px 0;
+    border: 2px solid transparent;
 
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
-
-    z-index: 500;
+    transition: 0.2s;
 }
 
-.nav-item {
+.order-item:hover {
+    transform: translateY(-2px);
+}
+
+.order-item.expanded {
+    border-color: #d0c66d;
+}
+
+.order-top {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    gap: 3px;
 
-    text-decoration: none;
-    color: #999;
-
-    font-size: 11px;
+    margin-bottom: 6px;
 }
 
-.nav-item.active {
-    color: #b8ab3f;
+.order-id {
+    font-size: 12px;
+    color: #7a6a1f;
     font-weight: 600;
 }
 
-.nav-icon {
-    font-size: 20px;
+.status-badge {
+    font-size: 10px;
+    font-weight: 700;
+
+    padding: 4px 10px;
+
+    border-radius: 20px;
+
+    color: white;
 }
+
+.status-badge.dibuat {
+    background: #8a8a8a;
+}
+
+.status-badge.diambil {
+    background: #e08a2c;
+}
+
+.status-badge.diantar {
+    background: #2f8f3b;
+}
+
+.order-summary-text {
+    font-size: 13px;
+    color: #555;
+}
+
+.order-detail {
+    margin-top: 12px;
+    padding-top: 12px;
+
+    border-top: 1px dashed #d9c47a;
+
+    font-size: 12px;
+    color: #444;
+
+    line-height: 1.7;
+}
+
+.order-detail strong {
+    color: #222;
+}
+
+.order-detail .detail-items {
+    margin-top: 6px;
+    padding-left: 14px;
+}
+
+/* ============================================================
+   BOTTOM NAVBAR: sekarang cuma di navbar.css, nggak diulang di sini
+   ============================================================ */
 
 /* ================================================================
    RESPONSIVE — TABLET & DESKTOP
    ================================================================ */
 @media (min-width: 768px) {
-
-    .account-container,
-    .bottom-nav {
+    .account-container {
         max-width: 600px;
     }
 }
 
 @media (min-width: 1024px) {
 
-    .account-container,
-    .bottom-nav {
+    .account-container {
         max-width: 700px;
     }
 
     .account-content {
         display: flex;
+        flex-wrap: wrap;
         gap: 20px;
+        align-content: flex-start;
     }
 
+    .profile-card,
+    .menu-list,
     .account-section {
-        flex: 1;
+        flex-basis: 100%;
     }
 }

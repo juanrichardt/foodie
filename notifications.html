@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Notifikasi</title>
     <link rel="stylesheet" href="notifications.css">
+    <link rel="stylesheet" href="navbar.css">
 </head>
 
 <body>
@@ -14,61 +15,18 @@
 
         <div class="notif-header">
             <h2>Notifikasi</h2>
+            <button id="markAllReadBtn">Tandai semua dibaca</button>
         </div>
 
-        <!-- CATATAN: list di bawah ini contoh/dummy statis,
-             belum konek ke sistem notifikasi asli -->
-        <div class="notif-list">
-
-            <div class="notif-item">
-                <span class="notif-icon">📦</span>
-                <div>
-                    <h4>Pesananmu sedang dikemas</h4>
-                    <p>Pesanan kamu lagi disiapkan, sabar ya!</p>
-                    <span class="notif-time">2 jam lalu</span>
-                </div>
-            </div>
-
-            <div class="notif-item">
-                <span class="notif-icon">🎉</span>
-                <div>
-                    <h4>Voucher baru buat kamu!</h4>
-                    <p>Ada diskon spesial menunggu di halaman checkout.</p>
-                    <span class="notif-time">5 jam lalu</span>
-                </div>
-            </div>
-
-            <div class="notif-item">
-                <span class="notif-icon">✅</span>
-                <div>
-                    <h4>Profil berhasil diperbarui</h4>
-                    <p>Data akun kamu sudah tersimpan dengan aman.</p>
-                    <span class="notif-time">Kemarin</span>
-                </div>
-            </div>
-
-        </div>
+        <!-- diisi otomatis sama notifications.js -->
+        <div class="notif-list" id="notifList"></div>
 
     </div>
 
-    <nav class="bottom-nav">
+    <div id="bottomNav"></div>
 
-        <a href="index.html" class="nav-item">
-            <span class="nav-icon">🏠</span>
-            <span class="nav-label">Beranda</span>
-        </a>
-
-        <a href="notifications.html" class="nav-item active">
-            <span class="nav-icon">🔔</span>
-            <span class="nav-label">Notifikasi</span>
-        </a>
-
-        <a href="account.html" class="nav-item">
-            <span class="nav-icon">⚙️</span>
-            <span class="nav-label">Akun</span>
-        </a>
-
-    </nav>
+    <script src="notifications.js"></script>
+    <script src="navbar.js"></script>
 
 </body>
 </html>

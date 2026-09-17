@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Edit Profil</title>
+    <link rel="stylesheet" href="account.css">
+    <link rel="stylesheet" href="navbar.css">
+</head>
+
+<body>
+
+    <div class="account-container">
+
+        <div class="account-header">
+            <a href="account.html" class="back-link">←</a>
+            <h2>Edit Profil</h2>
+        </div>
+
+        <div class="account-content">
+
+            <section class="account-section">
+
+                <h3>Data Diri</h3>
+
+                <label>Nama</label>
+                <input type="text" id="nameInput" placeholder="Nama kamu">
+
+                <label>Nomor Telepon</label>
+                <input type="tel" id="phoneInput" placeholder="Contoh: 081234567890">
+
+                <p class="hint">
+                    Nomor telepon dipakai buat verifikasi saat bayar.
+                    Kalau belum diisi, kamu belum bisa checkout.
+                </p>
+
+                <button class="save-btn" id="saveProfileBtn">Simpan Profil</button>
+                <p class="save-msg" id="profileSavedMsg">Profil tersimpan ✔</p>
+
+            </section>
+
+        </div>
+
+    </div>
+
+    <div id="bottomNav"></div>
+
+    <script src="edit-profile.js"></script>
+    <script src="navbar.js"></script>
+
+</body>
+</html>

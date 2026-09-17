@@ -199,6 +199,12 @@ if (isRegistered) {
     payNowBtn.style.display = "none";
 }
 
+/* ================================================================
+   DATA PENGEMUDI (buat status pengiriman di halaman Akun)
+   dipilih random tiap ada pesanan baru
+   ================================================================ */
+const driverNames = ["Budi Santoso", "Andi Wijaya", "Siti Rahma", "Joko Prasetyo", "Dedi Kurniawan"];
+
 const formView = document.getElementById("formView");
 const processingView = document.getElementById("processingView");
 const successView = document.getElementById("successView");
@@ -226,6 +232,32 @@ payNowBtn.addEventListener("click", function () {
         // hapus item yang barusan "dibayar" dari cart
         cart = cart.filter(item => item.selected === false);
         localStorage.setItem("cart", JSON.stringify(cart));
+
+        // ============================================================
+        // BIKIN CATATAN PESANAN (buat ditampilkan sebagai "Status
+        // Pesanan" di halaman Akun). createdAt dipakai buat simulasi
+        // status berjalan seiring waktu (lihat account.js).
+        // ============================================================
+        const methodId = document.querySelector('input[name="method"]:checked').value;
+        const method = paymentMethods.find(m => m.id === methodId);
+
+        const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+        orders.unshift({
+            id: "ORD" + Date.now(),
+            items: selectedItems.map(item => ({
+                name: item.name,
+                price: item.price,
+                quantity: item.quantity
+            })),
+            total: lastTotal,
+            address: defaultAddress || null,
+            paymentMethod: method.label,
+            driver: driverNames[Math.floor(Math.random() * driverNames.length)],
+            createdAt: Date.now()
+        });
+
+        localStorage.setItem("orders", JSON.stringify(orders));
 
         document.getElementById("successTotal").innerText = lastTotal.toLocaleString("id-ID");
         successView.classList.add("show");

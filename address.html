@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Alamat Saya</title>
+    <link rel="stylesheet" href="account.css">
+    <link rel="stylesheet" href="navbar.css">
+</head>
+
+<body>
+
+    <div class="account-container">
+
+        <div class="account-header">
+            <a href="account.html" class="back-link">←</a>
+            <h2>Alamat Saya</h2>
+        </div>
+
+        <div class="account-content">
+
+            <section class="account-section">
+
+                <h3>Daftar Alamat</h3>
+
+                <div id="addressList"></div>
+
+                <div class="address-form">
+
+                    <label>Label Alamat</label>
+                    <input type="text" id="addrLabel" placeholder="Rumah / Kantor / dll">
+
+                    <label>Nama Penerima</label>
+                    <input type="text" id="addrRecipient" placeholder="Nama penerima">
+
+                    <label>No. Telepon Penerima</label>
+                    <input type="tel" id="addrPhone" placeholder="No. telepon penerima">
+
+                    <label>Alamat Lengkap</label>
+                    <textarea id="addrFull" rows="3" placeholder="Jalan, no rumah, kecamatan, kota, kode pos"></textarea>
+
+                    <button class="save-btn" id="addAddressBtn">+ Tambah Alamat</button>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+    <div id="bottomNav"></div>
+
+    <script src="address.js"></script>
+    <script src="navbar.js"></script>
+
+</body>
+</html>
