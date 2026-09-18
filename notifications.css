@@ -5,21 +5,21 @@
 }
 
 html {
-    background: #e8e8e8;
+    background: #fdf3e5;
     overflow-x: hidden;
 }
 
 body {
-    background: #e8e8e8;
+    background: #fdf3e5;
     font-family: "Poppins", sans-serif;
     overflow-x: hidden;
 }
 
 .notif-container {
     width: 100%;
-    max-width: 350px;
+    max-width: none;
     min-height: 100vh;
-    margin: auto;
+    margin: 0;
     background: #fdf3e5;
     padding-bottom: 90px;
 }
@@ -165,14 +165,3 @@ body {
 /* ================================================================
    RESPONSIVE — TABLET & DESKTOP
    ================================================================ */
-@media (min-width: 768px) {
-    .notif-container {
-        max-width: 600px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .notif-container {
-        max-width: 700px;
-    }
-}

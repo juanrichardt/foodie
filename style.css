@@ -4,32 +4,34 @@
     box-sizing: border-box;
 }
 
-/* RESPONSIVE FIX: html-nya dikasih background yang sama kayak body,
-   biar pas ada efek overscroll/bounce (misal di iPhone Safari),
-   yang keliatan di belakang bukan putih polos, tapi warna yang senada.
-   overflow-x hidden juga jaga-jaga biar nggak ada scroll ke samping. */
 html {
-    background: #ededed;
+    width: 100%;
+    min-height: 100%;
     overflow-x: hidden;
+    background: #fdf3e5;
 }
 
 body {
-    background: #ededed;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+
     font-family: "Poppins", sans-serif;
+
     overflow-x: hidden;
+    background: #fdf3e5;
 }
 
-/* RESPONSIVE: width diubah dari fixed 350px jadi fluid.
-   width: 100%   -> ikut lebar layar (HP kecil sekalipun aman)
-   max-width: 350px -> di layar gede, tetep dibatasi biar nggak melar nggak jelas
-   (nanti max-width ini yang kita PERBESAR di media query bawah, per breakpoint) */
 .container {
     width: 100%;
-    max-width: 350px;
+    max-width: none;
     min-height: 100vh;
-    margin: auto;
+
+    margin: 0;
+    padding-bottom: 80px;
+
     background: #fdf3e5;
-    padding-bottom: 80px; /* ruang biar konten paling bawah ga ketutup .bottom-nav */
 }
 
 /* HEADER */
@@ -420,7 +422,7 @@ button {
 @media (min-width: 768px) {
 
     .container {
-        max-width: 600px;
+        max-width: none;
     }
 
     header {
@@ -455,7 +457,7 @@ button {
 @media (min-width: 1024px) {
 
     .container {
-        max-width: 960px;
+        max-width: none;
     }
 
     /* di layar lebar, kartu kategori & produk nggak usah di-scroll

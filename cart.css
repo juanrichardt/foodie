@@ -5,12 +5,12 @@
 }
 
 html {
-    background: #e8e8e8;
+    background: #fdf3e5;
     overflow-x: hidden;
 }
 
 body {
-    background: #e8e8e8;
+    background: #fdf3e5;
     font-family: "Poppins", sans-serif;
     overflow-x: hidden;
 }
@@ -18,9 +18,9 @@ body {
 /* RESPONSIVE: sama kayak di style.css, width fixed diubah jadi fluid */
 .cart-container {
     width: 100%;
-    max-width: 350px;
+    max-width: none;
     min-height: 100vh;
-    margin: auto;
+    margin: 0;
     background: #fff6e8;
     position: relative;
 }
